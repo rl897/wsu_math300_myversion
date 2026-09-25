@@ -247,30 +247,37 @@ $\Theta(g)$ & tight: both $O(g)$ and $\Omega(g)$ \\
 
 \begin{frame}{Big-$O$ in practice: reading loops}
 \begin{columns}[T]
-\begin{column}{0.5\textwidth}
+\begin{column}{0.53\textwidth}
 \small
-\begin{tabular}{lc}
+Count how many times the loop body runs, then keep the biggest term and drop constants.
+
+\vspace{0.2cm}
+\footnotesize
+\begin{tabular}{@{}llc@{}}
 \toprule
-loop pattern & cost \\
+loop pattern & rounds & cost \\
 \midrule
-fixed number of rounds & $O(1)$ \\
-\texttt{i += c} & $O(n)$ \\
-\texttt{i *= 2} & $O(\log n)$ \\
-two nested loops to $n$ & $O(n^2)$ \\
-loop, then another loop & $O(n)$ \\
+fixed number (e.g.\ 10) & $10$ & $O(1)$ \\
+\texttt{i += c} up to $n$ & $n/c$ & $O(n)$ \\
+\texttt{i *= 2} up to $n$ & $\log_2 n$ & $O(\log n)$ \\
+two nested loops to $n$ & $n \cdot n$ & $O(n^2)$ \\
+loop, then another loop & $n + n$ & $O(n)$ \\
 \bottomrule
 \end{tabular}
 
 \vspace{0.3cm}
-\begin{block}{The doubling test}
-Double $n$ and watch the flop count: $\times2 \Rightarrow n$, \ $\times4 \Rightarrow n^2$, \ $\times8 \Rightarrow n^3$, \ $+1 \Rightarrow \log n$.
+\begin{block}{Two rules}
+\footnotesize
+\textbf{Nested} loops \textbf{multiply}; loops \textbf{one after another} \textbf{add}.\\[2pt]
+Example: a double loop, then a single loop: $n^2 + n = O(n^2)$.
 \end{block}
 \end{column}
-\begin{column}{0.47\textwidth}
+
+\begin{column}{0.44\textwidth}
 \centering
 \begin{tikzpicture}
 \begin{axis}[
-  width=4.4cm, height=4.6cm, axis lines=left, xmin=1, xmax=20, ymin=0, ymax=100,
+  width=4.2cm, height=3.9cm, axis lines=left, xmin=1, xmax=20, ymin=0, ymax=100,
   xlabel={$n$}, ylabel={flops},
   legend style={font=\tiny, at={(1.03,1)}, anchor=north west, draw=none},
   samples=100, thick, tick label style={font=\tiny}, label style={font=\small}]
@@ -280,8 +287,17 @@ Double $n$ and watch the flop count: $\times2 \Rightarrow n$, \ $\times4 \Righta
   \addplot[red, domain=1:10] {x^2};                \addlegendentry{$n^2$}
   \addplot[violet, domain=1:6.64] {2^x};           \addlegendentry{$2^n$}
 \end{axis}
-\end{tikzpicture}\\[2pt]
-\scriptsize Big-$O$ also describes \textbf{errors}: later we will write\\ error $= O(1/n)$ or $O(0.67^n)$.
+\end{tikzpicture}
+
+\vspace{0.1cm}
+\begin{block}{The doubling test}
+\scriptsize
+Double $n$, watch the flop count:\\
+$\times2 \Rightarrow O(n)$, \ $\times4 \Rightarrow O(n^2)$, \ $\times8 \Rightarrow O(n^3)$, \ $+1 \Rightarrow O(\log n)$.
+\end{block}
+
+\vspace{0.1cm}
+\scriptsize Big-$O$ also describes \textbf{errors}: later we write error $= O(1/n)$ or $O(0.67^n)$.
 \end{column}
 \end{columns}
 \end{frame}
