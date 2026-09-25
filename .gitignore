@@ -217,3 +217,10 @@ ignored_folder/*
 Sep21/frames/*
 Sep21/*.gif
 Sep21/*.html
+*.aux
+*.nav
+*.out
+*.snm
+*.gz
+*.toc
+*.vrb
